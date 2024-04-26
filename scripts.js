@@ -10,7 +10,7 @@ let tabImg = $("[tabs='tabs-container']").find(
     $("[tabs='tabs-images] > image")
 );
 
-// make first tab active on page load
+// make first tab active on page loads
 function makeItemActive(itemNumber) {
     tabItem.removeClass("is-active");
     tabItem.eq(itemNumber).addClass("is-active");
