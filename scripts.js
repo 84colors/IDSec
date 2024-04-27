@@ -1,64 +1,71 @@
 `use strict`;
 const isLocal = true;
 
-console.log("hello from local");
+console.log("hello from localsss");
 
-//Tabs
+// TABS WITH IMAGES
+// -------------------
+// [tabs='tabs-container'] on main section to separate from other instances
+// [tabs='tabs-images'] on images container, with imgs as direct child. Img gets opacity 0 by default and opacity 100% on 'is-active' class
+// [tabs='tabs-items'] on container of all items, usually a flex, with item as direct child
+// [tabs='tabs-item-content'] on container of text to be hidden, gets 0 height by default and height auto on 'is-active' class
+// -------------------
+
 let tabContainer = $("[tabs='tabs-container']");
-let tabItem = $("[tabs='tabs-container']").find($("[tabs='tabs-items'] > div"));
-let tabImg = $("[tabs='tabs-container']").find(
-    $("[tabs='tabs-images] > image")
-);
 
-// make first tab active on page loads
-function makeItemActive(itemNumber) {
-    tabItem.removeClass("is-active");
-    tabItem.eq(itemNumber).addClass("is-active");
-    tabImg.removeClass("is-active");
-    tabImg.eq(itemNumber).addClass("is-active");
-}
+tabContainer.each(function () {
+    let tabItem = $(this).find($("[tabs='tabs-items'] > div"));
+    let tabImg = $(this).find($("[tabs='tabs-images'] > img"));
 
-// create infinitely looping timeline
-let tlTabs = gsap.timeline({
-    repeat: -1,
-    defaults: {
-        ease: "none",
-    },
+    //Activate first item
+    tabItem.eq(0).addClass("is-active");
+    tabItem.eq(0).find($("[tabs='tabs-item-content']")).addClass("is-active");
+    tabImg.eq(0).addClass("is-active");
+
+    // add a timeline for each tab item and pass index
+    tabItem.each(function (index) {
+        let tabContent = $(this).find("[tabs='tabs-item-content']");
+
+        //get index
+        //on click active class to clicked tab and play timeline
+        $(this).on("click", function () {
+            tabItem.removeClass("is-active");
+            tabImg.removeClass("is-active");
+            tabItem
+                .find($("[tabs='tabs-item-content']"))
+                .removeClass("is-active");
+            $(this).addClass("is-active");
+            tabImg.eq(index).addClass("is-active");
+            tabContent.addClass("is-active");
+        });
+    });
 });
 
-// add a step to the timeline for each cms item
+// FAQ TOGGLES
+// -------------------
+// [faq='faq-container'] on container of all items, usually a flex, with item as direct child
+// [faq='faq-item-content'] on container of text to be hidden, gets 0 height by default and height auto on 'is-active' class
+// [faq='faq-item-img'] on icon that spins
+// -------------------
+let faqContainer = $("[faq='faq-container']");
 
-tabItem.each(function (index) {
-    // add a label to this step
-    tlTabs.addLabel(`step${index}`);
+faqContainer.each(function () {
+    let faqItem = $(this).find($("[faq='faq-container'] > div"));
 
-    // animate the progress bar inside this item
-    tlTabs.to($(this).find(".tab-line.is-green"), {
-        height: "100%",
-        duration: 5,
-        onStart: () => {
-            // switch active class to this item when animation starts
-            makeItemActive(index);
-            // set video inside this item back to beginning
-            $(this)
-                .closest(".has-tabs")
-                .find(".tab-video")
-                .eq(index)
-                .find("video")
-                .get(0)
-                .play();
-        },
-    });
-
-    tlTabs.fromTo(
-        $(this).find(".tab-text"),
-        { opacity: 0 },
-        { opacity: 1, duration: 0.5 },
-        "<"
-    );
-
-    // jump to this step on the timeline on click of this cms item
-    $(this).on("click", function () {
-        tlTabs.seek(`step${index}`);
+    // add a timeline for each tab item and pass index
+    faqItem.each(function () {
+        let faqContent = $(this).find("[faq='faq-item-content']");
+        let faqContentImg = $(this).find("[faq='faq-item-img']");
+        //on click active class to clicked tab and play timeline
+        $(this).on("click", function () {
+            faqItem.removeClass("is-active");
+            faqItem
+                .find($("[faq='faq-item-content']"))
+                .removeClass("is-active");
+            faqItem.find($("[faq='faq-item-img']")).removeClass("is-active");
+            $(this).toggleClass("is-active");
+            faqContentImg.toggleClass("is-active");
+            faqContent.toggleClass("is-active");
+        });
     });
 });
