@@ -13,6 +13,25 @@ console.log("hello from localsss");
 
 let tabContainer = $("[tabs='tabs-container']");
 
+//Change source to local to test renders
+// ---- REMOVE FROM PROD ----
+const useLocalImgs = function () {
+    let headerImgs = $(".header5_background-media");
+    let tabContainer = $("[tabs='tabs-container']");
+
+    headerImgs.attr("src", "http://127.0.0.1:5500/Renders/header01.png");
+    headerImgs.attr("srcset", "");
+
+    tabContainer.each(function () {
+        let tabImg = $(this).find($("[tabs='tabs-images'] > img"));
+        tabImg.eq(0).attr("src", "http://127.0.0.1:5500/Renders/test01.png");
+        tabImg.eq(0).attr("srcset", "");
+    });
+};
+
+// useLocalImgs();
+// ---- REMOVE FROM PROD ----
+
 tabContainer.each(function () {
     let tabItem = $(this).find($("[tabs='tabs-items'] > div"));
     let tabImg = $(this).find($("[tabs='tabs-images'] > img"));
