@@ -11,8 +11,6 @@ console.log("hello from localsss");
 // [tabs='tabs-item-content'] on container of text to be hidden, gets 0 height by default and height auto on 'is-active' class
 // -------------------
 
-let tabContainer = $("[tabs='tabs-container']");
-
 //Change source to local to test renders
 // ---- REMOVE FROM PROD ----
 const useLocalImgs = function () {
@@ -30,8 +28,11 @@ const useLocalImgs = function () {
 };
 
 // useLocalImgs();
-// ---- REMOVE FROM PROD ----
 
+// ---- END REMOVE FROM PROD ----
+
+// Product Tabs
+let tabContainer = $("[tabs='tabs-container']");
 tabContainer.each(function () {
     let tabItem = $(this).find($("[tabs='tabs-items'] > div"));
     let tabImg = $(this).find($("[tabs='tabs-images'] > img"));
@@ -52,6 +53,39 @@ tabContainer.each(function () {
             tabImg.removeClass("is-active");
             tabItem
                 .find($("[tabs='tabs-item-content']"))
+                .removeClass("is-active");
+            $(this).addClass("is-active");
+            tabImg.eq(index).addClass("is-active");
+            tabContent.addClass("is-active");
+        });
+    });
+});
+
+// Features Tabs
+let featuresContainer = $("[features='features-container']");
+featuresContainer.each(function () {
+    let tabItem = $(this).find($("[features='features-items'] > div"));
+    let tabImg = $(this).find($("[features='features-images'] > img"));
+
+    //Activate first item
+    tabItem.eq(0).addClass("is-active");
+    tabItem
+        .eq(0)
+        .find($("[features='features-item-content']"))
+        .addClass("is-active");
+    tabImg.eq(0).addClass("is-active");
+
+    // add a timeline for each tab item and pass index
+    tabItem.each(function (index) {
+        let tabContent = $(this).find("[features='features-item-content']");
+
+        //get index
+        //on click active class to clicked tab and play timeline
+        $(this).on("click", function () {
+            tabItem.removeClass("is-active");
+            tabImg.removeClass("is-active");
+            tabItem
+                .find($("[features='features-item-content']"))
                 .removeClass("is-active");
             $(this).addClass("is-active");
             tabImg.eq(index).addClass("is-active");
