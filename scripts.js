@@ -1,7 +1,7 @@
 `use strict`;
 // const isLocal = true;
 
-console.log("hello from localsss");
+// console.log("hello from localsss");
 
 // TABS WITH IMAGES
 // -------------------
