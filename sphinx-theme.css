@@ -1,0 +1,26 @@
+html_theme_options = {
+    "light_css_variables": {
+		color-background-secondary: #F3F5F6,
+		color-brand-primary: #FF3257,
+		color-brand-visited: #FF3257,
+		color-brand-content: #FF3257,
+		color-link: #FF3257,
+		color-link-visited: #393939,
+		color-link-underline: #c2c2c2,
+		color-linkhover: #01040F,
+		color-background-border: #E6E9F0,
+		color-sidebar-link-texttop-level: #01040F,
+		color-sidebar-link-text: #01040F,
+		color-background-hover: #EAEEF0,
+		color-admonition-title: #FF3257,
+		color-admonition-title-background: #EFEFEF,
+	},
+	"dark_css_variables": {
+		color-sidebar-link-texttop-level: #ffffff,
+		color-sidebar-link-text: #b4b6bd,
+		color-link-visited: #a9a9a9,
+		color-linkhover: #ffffff,
+		color-link-underline: #525252,
+		color-admonition-title-background: #2e2e2e,
+	},
+}
